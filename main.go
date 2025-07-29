@@ -5,6 +5,8 @@ import (
 	"os"
 	"strconv"
 
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -32,6 +34,7 @@ func main() {
 		value := c.Param("value")
 
 		if err := rClient.Set(key, value); err != nil {
+			fmt.Printf("Error : %v\n", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to set value"})
 			return
 		}
